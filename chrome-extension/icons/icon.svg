@@ -1,0 +1,23 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="128" height="128" rx="20" ry="20" fill="url(#bg)"/>
+
+  <!-- Shield shape -->
+  <path d="M64 20 L90 35 L90 70 L64 108 L38 70 L38 35 Z" fill="white" stroke="none"/>
+
+  <!-- Block/X symbol inside shield -->
+  <g stroke="#667eea" stroke-width="6" stroke-linecap="round">
+    <line x1="50" y1="50" x2="78" y2="78"/>
+    <line x1="78" y1="50" x2="50" y2="78"/>
+  </g>
+
+  <!-- Small focus dot -->
+  <circle cx="64" cy="90" r="4" fill="#667eea"/>
+</svg>

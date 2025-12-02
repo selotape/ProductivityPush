@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ProductivityPush Icon Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .icon-container { margin: 20px; display: inline-block; text-align: center; }
+        canvas { border: 1px solid #ccc; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>ProductivityPush Chrome Extension Icons</h1>
+    <p>Right-click each canvas and "Save image as..." to get the PNG files.</p>
+
+    <div class="icon-container">
+        <h3>16x16</h3>
+        <canvas id="icon16" width="16" height="16"></canvas>
+    </div>
+
+    <div class="icon-container">
+        <h3>32x32</h3>
+        <canvas id="icon32" width="32" height="32"></canvas>
+    </div>
+
+    <div class="icon-container">
+        <h3>48x48</h3>
+        <canvas id="icon48" width="48" height="48"></canvas>
+    </div>
+
+    <div class="icon-container">
+        <h3>128x128</h3>
+        <canvas id="icon128" width="128" height="128"></canvas>
+    </div>
+
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+
+            // Draw background
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Draw shield/protection symbol
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = Math.max(1, size / 32);
+
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const scale = size / 128;
+
+            // Draw shield shape
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY - 30 * scale);
+            ctx.lineTo(centerX + 20 * scale, centerY - 20 * scale);
+            ctx.lineTo(centerX + 20 * scale, centerY + 10 * scale);
+            ctx.lineTo(centerX, centerY + 30 * scale);
+            ctx.lineTo(centerX - 20 * scale, centerY + 10 * scale);
+            ctx.lineTo(centerX - 20 * scale, centerY - 20 * scale);
+            ctx.closePath();
+            ctx.fill();
+
+            // Draw "X" or block symbol inside shield
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = Math.max(2, size / 16);
+            ctx.beginPath();
+            ctx.moveTo(centerX - 10 * scale, centerY - 10 * scale);
+            ctx.lineTo(centerX + 10 * scale, centerY + 10 * scale);
+            ctx.moveTo(centerX + 10 * scale, centerY - 10 * scale);
+            ctx.lineTo(centerX - 10 * scale, centerY + 10 * scale);
+            ctx.stroke();
+        }
+
+        // Generate all icon sizes
+        drawIcon(document.getElementById('icon16'), 16);
+        drawIcon(document.getElementById('icon32'), 32);
+        drawIcon(document.getElementById('icon48'), 48);
+        drawIcon(document.getElementById('icon128'), 128);
+
+        // Auto-download function (you can uncomment to auto-download)
+        /*
+        function downloadCanvas(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Uncomment these lines to auto-download:
+        // downloadCanvas(document.getElementById('icon16'), 'icon16.png');
+        // downloadCanvas(document.getElementById('icon32'), 'icon32.png');
+        // downloadCanvas(document.getElementById('icon48'), 'icon48.png');
+        // downloadCanvas(document.getElementById('icon128'), 'icon128.png');
+        */
+    </script>
+</body>
+</html>
