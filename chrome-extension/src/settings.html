@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ProductivityPush Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🛡️</span>
+                    <h1>ProductivityPush Settings</h1>
+                </div>
+                <p class="subtitle">Configure your productivity blocking preferences</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Blocking Status Section -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>🚫 Blocking Status</h2>
+                    <p>Current blocking state and quick controls</p>
+                </div>
+                <div class="status-card">
+                    <div class="status-info">
+                        <span class="status-indicator" id="statusIndicator">⚪</span>
+                        <div class="status-text">
+                            <div class="status-title" id="statusTitle">Blocking Inactive</div>
+                            <div class="status-subtitle" id="statusSubtitle">Click to enable website blocking</div>
+                        </div>
+                    </div>
+                    <button class="toggle-btn" id="toggleBtn">Enable Blocking</button>
+                </div>
+            </section>
+
+            <!-- Blocked Sites Section -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>🌐 Blocked Websites</h2>
+                    <p>Manage which sites should be blocked</p>
+                </div>
+
+                <!-- Add New Site -->
+                <div class="add-site-container">
+                    <div class="input-group">
+                        <input type="text" id="newSiteInput" placeholder="Enter website (e.g., youtube.com)" class="site-input">
+                        <button id="addSiteBtn" class="add-btn">Add Site</button>
+                    </div>
+                    <div class="input-help">Enter just the domain name without http:// or www.</div>
+                </div>
+
+                <!-- Default Sites -->
+                <div class="sites-group">
+                    <h3>Default Blocked Sites</h3>
+                    <div class="sites-list" id="defaultSitesList">
+                        <!-- Default sites will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Custom Sites -->
+                <div class="sites-group">
+                    <h3>Custom Blocked Sites</h3>
+                    <div class="sites-list" id="customSitesList">
+                        <!-- Custom sites will be populated by JavaScript -->
+                    </div>
+                    <div class="empty-state" id="customSitesEmpty" style="display: none;">
+                        <p>No custom sites added yet. Add sites above to get started!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Productivity Features Section -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>📈 Productivity Features</h2>
+                    <p>Daily goals and motivation settings</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <h3>Daily Task Goal</h3>
+                        <p>Set a target number of tasks to complete each day</p>
+                    </div>
+                    <div class="feature-control">
+                        <input type="range" id="dailyGoalSlider" min="1" max="20" value="3" class="slider">
+                        <span class="slider-value" id="dailyGoalValue">3 tasks</span>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <h3>Motivational Messages</h3>
+                        <p>Show encouraging messages on blocked pages</p>
+                    </div>
+                    <div class="feature-control">
+                        <label class="switch">
+                            <input type="checkbox" id="motivationToggle" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <h3>Block Page Redirect</h3>
+                        <p>Redirect to a productive site instead of showing block page</p>
+                    </div>
+                    <div class="feature-control">
+                        <select id="redirectSelect" class="redirect-select">
+                            <option value="">Show block page</option>
+                            <option value="https://todoist.com/app/today">Todoist</option>
+                            <option value="https://calendar.google.com">Google Calendar</option>
+                            <option value="https://notion.so">Notion</option>
+                            <option value="https://docs.google.com">Google Docs</option>
+                            <option value="custom">Custom URL...</option>
+                        </select>
+                        <input type="url" id="customRedirectInput" placeholder="Enter custom URL..." class="custom-redirect-input" style="display: none;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>⏰ Schedule Settings</h2>
+                    <p>Configure when blocking should be active</p>
+                </div>
+
+                <div class="schedule-options">
+                    <div class="schedule-option">
+                        <label class="radio-option">
+                            <input type="radio" name="scheduleType" value="always" id="scheduleAlways" checked>
+                            <span class="radio-custom"></span>
+                            <div class="radio-content">
+                                <div class="radio-title">Always Active</div>
+                                <div class="radio-description">Block sites 24/7</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="schedule-option">
+                        <label class="radio-option">
+                            <input type="radio" name="scheduleType" value="work" id="scheduleWork">
+                            <span class="radio-custom"></span>
+                            <div class="radio-content">
+                                <div class="radio-title">Work Hours</div>
+                                <div class="radio-description">Block during work hours (9 AM - 5 PM, Mon-Fri)</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="schedule-option">
+                        <label class="radio-option">
+                            <input type="radio" name="scheduleType" value="custom" id="scheduleCustom">
+                            <span class="radio-custom"></span>
+                            <div class="radio-content">
+                                <div class="radio-title">Custom Schedule</div>
+                                <div class="radio-description">Set specific times and days</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Custom Schedule Details (hidden by default) -->
+                <div id="customScheduleDetails" class="custom-schedule" style="display: none;">
+                    <div class="time-inputs">
+                        <div class="time-group">
+                            <label>Start Time:</label>
+                            <input type="time" id="startTime" value="09:00">
+                        </div>
+                        <div class="time-group">
+                            <label>End Time:</label>
+                            <input type="time" id="endTime" value="17:00">
+                        </div>
+                    </div>
+
+                    <div class="days-selection">
+                        <label>Active Days:</label>
+                        <div class="days-grid">
+                            <label class="day-checkbox"><input type="checkbox" value="1" checked> Mon</label>
+                            <label class="day-checkbox"><input type="checkbox" value="2" checked> Tue</label>
+                            <label class="day-checkbox"><input type="checkbox" value="3" checked> Wed</label>
+                            <label class="day-checkbox"><input type="checkbox" value="4" checked> Thu</label>
+                            <label class="day-checkbox"><input type="checkbox" value="5" checked> Fri</label>
+                            <label class="day-checkbox"><input type="checkbox" value="6"> Sat</label>
+                            <label class="day-checkbox"><input type="checkbox" value="0"> Sun</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>📊 Statistics</h2>
+                    <p>Your productivity insights</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="todayBlocked">0</div>
+                        <div class="stat-label">Sites Blocked Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="tasksCompleted">0</div>
+                        <div class="stat-label">Tasks Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="streakDays">0</div>
+                        <div class="stat-label">Day Streak</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalBlocked">0</div>
+                        <div class="stat-label">Total Blocks</div>
+                    </div>
+                </div>
+
+                <div class="stats-actions">
+                    <button id="resetStatsBtn" class="secondary-btn">Reset Statistics</button>
+                    <button id="exportDataBtn" class="secondary-btn">Export Data</button>
+                </div>
+            </section>
+
+            <!-- Save Section -->
+            <section class="save-section">
+                <div class="save-actions">
+                    <button id="saveBtn" class="primary-btn">Save Settings</button>
+                    <button id="resetBtn" class="secondary-btn">Reset to Defaults</button>
+                </div>
+                <div class="save-status" id="saveStatus" style="display: none;"></div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>ProductivityPush v1.0 - Stay focused, stay productive!</p>
+            <div class="footer-links">
+                <a href="#" id="aboutLink">About</a>
+                <a href="#" id="helpLink">Help</a>
+                <a href="https://github.com/selotape/ProductivityPush" target="_blank">GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+</html>

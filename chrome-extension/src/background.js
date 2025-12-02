@@ -14,15 +14,37 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.set({
         blockingEnabled: false,
         blockedSites: defaultBlockedSites,
+        customSites: [],
         dailyTasks: 0,
-        lastTaskDate: new Date().toDateString()
+        dailyGoal: 3,
+        motivationEnabled: true,
+        redirectUrl: '',
+        scheduleType: 'always',
+        customSchedule: {
+            startTime: '09:00',
+            endTime: '17:00',
+            activeDays: [1, 2, 3, 4, 5]
+        },
+        todayBlocked: 0,
+        tasksCompleted: 0,
+        streakDays: 0,
+        totalBlocked: 0,
+        lastTaskDate: new Date().toDateString(),
+        lastResetDate: new Date().toDateString()
     });
 });
 
-// Listen for messages from popup
+// Listen for messages from popup and settings
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'toggleBlocking') {
         updateBlockingRules(request.enabled);
+    } else if (request.action === 'settingsUpdated') {
+        // Refresh blocking rules when settings change
+        chrome.storage.local.get(['blockingEnabled'], (result) => {
+            if (result.blockingEnabled) {
+                updateBlockingRules(true);
+            }
+        });
     }
 });
 
