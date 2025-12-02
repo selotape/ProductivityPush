@@ -8,12 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.productivitypush.databinding.ActivityMainBinding
 import com.productivitypush.service.AppMonitoringService
+import com.productivitypush.service.ShutdownSchedulerService
 import com.productivitypush.viewmodel.MainViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var shutdownScheduler: ShutdownSchedulerService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +25,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        shutdownScheduler = ShutdownSchedulerService(this)
 
         setupUI()
         observeViewModel()
+        updateShutdownInfo()
         checkPermissions()
     }
 
@@ -54,6 +60,26 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Please enter a task", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            // Shutdown toggle
+            switchShutdownEnabled.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.toggleShutdown(isChecked)
+                if (isChecked) {
+                    val schedule = shutdownScheduler.getSchedule().copy(isEnabled = true)
+                    shutdownScheduler.saveSchedule(schedule)
+                    Toast.makeText(this@MainActivity, "Scheduled shutdown enabled", Toast.LENGTH_SHORT).show()
+                } else {
+                    val schedule = shutdownScheduler.getSchedule().copy(isEnabled = false)
+                    shutdownScheduler.saveSchedule(schedule)
+                    Toast.makeText(this@MainActivity, "Scheduled shutdown disabled", Toast.LENGTH_SHORT).show()
+                }
+                updateShutdownInfo()
+            }
+
+            // Configure shutdown button
+            btnConfigureShutdown.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ShutdownSettingsActivity::class.java))
+            }
         }
     }
 
@@ -70,6 +96,11 @@ class MainActivity : AppCompatActivity() {
 
             motivationalMessage.observe(this@MainActivity) { message ->
                 binding.textMotivation.text = message
+            }
+
+            isShutdownEnabled.observe(this@MainActivity) { isEnabled ->
+                binding.switchShutdownEnabled.isChecked = isEnabled
+                binding.textShutdownStatus.text = if (isEnabled) "Shutdown Scheduled" else "Shutdown Disabled"
             }
         }
     }
@@ -111,5 +142,28 @@ class MainActivity : AppCompatActivity() {
     private fun stopAppMonitoringService() {
         val intent = Intent(this, AppMonitoringService::class.java)
         stopService(intent)
+    }
+
+    private fun updateShutdownInfo() {
+        val schedule = shutdownScheduler.getSchedule()
+        viewModel.setShutdownEnabled(schedule.isEnabled)
+
+        if (schedule.isEnabled) {
+            val nextShutdownTime = shutdownScheduler.getNextShutdownTime()
+            if (nextShutdownTime != null) {
+                val formatter = SimpleDateFormat("EEEE 'at' h:mm a", Locale.getDefault())
+                val nextShutdownText = "Next shutdown: ${formatter.format(Date(nextShutdownTime))}"
+                binding.textNextShutdown.text = nextShutdownText
+            } else {
+                binding.textNextShutdown.text = "No shutdown scheduled"
+            }
+        } else {
+            binding.textNextShutdown.text = "Shutdown disabled"
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateShutdownInfo() // Refresh shutdown info when returning to activity
     }
 }

@@ -11,6 +11,18 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <!-- Permissions for shutdown functionality -->
+    <uses-permission android:name="android.permission.REBOOT"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.DEVICE_POWER"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.SHOW_WHEN_LOCKED"
+        tools:ignore="ProtectedPermissions" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -39,6 +51,12 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
 
+        <!-- Shutdown Settings Activity -->
+        <activity
+            android:name=".ShutdownSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
         <!-- Blocked App Activity -->
         <activity
             android:name=".BlockedActivity"
@@ -46,11 +64,34 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.ProductivityPush.Fullscreen" />
 
+        <!-- Shutdown Fallback Activity -->
+        <activity
+            android:name=".ShutdownFallbackActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.ProductivityPush.Fullscreen"
+            android:screenOrientation="portrait"
+            android:noHistory="true" />
+
         <!-- App Monitoring Service -->
         <service
             android:name=".service.AppMonitoringService"
             android:enabled="true"
             android:exported="false" />
+
+        <!-- Shutdown Receiver -->
+        <receiver
+            android:name=".receiver.ShutdownReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.productivitypush.SHUTDOWN_WARNING" />
+                <action android:name="com.productivitypush.SHUTDOWN" />
+                <action android:name="com.productivitypush.CANCEL_SHUTDOWN" />
+                <action android:name="com.productivitypush.SNOOZE_SHUTDOWN" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <!-- Boot Receiver -->
         <receiver

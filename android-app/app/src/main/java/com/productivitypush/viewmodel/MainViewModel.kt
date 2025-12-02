@@ -15,6 +15,9 @@ class MainViewModel : ViewModel() {
     private val _motivationalMessage = MutableLiveData<String>()
     val motivationalMessage: LiveData<String> = _motivationalMessage
 
+    private val _isShutdownEnabled = MutableLiveData<Boolean>(false)
+    val isShutdownEnabled: LiveData<Boolean> = _isShutdownEnabled
+
     private val motivationalMessages = listOf(
         "Every small step counts towards your big goals! 🎯",
         "You're building better habits one day at a time! 💪",
@@ -52,5 +55,13 @@ class MainViewModel : ViewModel() {
     fun resetDailyStats() {
         _dailyTasks.value = 0
         updateMotivationalMessage()
+    }
+
+    fun toggleShutdown(enabled: Boolean) {
+        _isShutdownEnabled.value = enabled
+    }
+
+    fun setShutdownEnabled(enabled: Boolean) {
+        _isShutdownEnabled.value = enabled
     }
 }

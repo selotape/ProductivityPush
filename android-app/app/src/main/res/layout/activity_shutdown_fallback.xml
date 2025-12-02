@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center">
+
+    <!-- Shutdown Icon -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📵"
+        android:textSize="80sp"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/text_shutdown_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Digital Detox Mode"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Main Message -->
+    <TextView
+        android:id="@+id/text_shutdown_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your phone is now in shutdown mode. Time to disconnect and focus on what truly matters."
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.4"
+        android:layout_marginBottom="40dp" />
+
+    <!-- Motivational Content -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/primary"
+        app:cardElevation="8dp"
+        android:layout_marginBottom="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💡 Productive Ideas"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/text_motivational_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Use this time wisely..."
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:lineSpacingMultiplier="1.3" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Time Display -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your scheduled shutdown is now active"
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Emergency Exit (Hidden by default) -->
+    <Button
+        android:id="@+id/btn_emergency_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency Exit"
+        android:textColor="@color/error"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+    <!-- Help Text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Long press anywhere to reveal emergency exit"
+        android:textSize="10sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:alpha="0.5" />
+
+</LinearLayout>
