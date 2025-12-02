@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Site Blocked - ProductivityPush</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+        }
+        .icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .motivation-box {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🚫</div>
+        <h1>Site Blocked</h1>
+        <p>This site is blocked by ProductivityPush to help you stay focused and productive.</p>
+
+        <div class="motivation-box">
+            <p><strong>💡 Motivation Tip:</strong></p>
+            <p id="motivationText">Every minute you save from distractions is a minute invested in your goals!</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="blockedToday">0</div>
+                <div class="stat-label">Sites Blocked Today</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="tasksCompleted">0</div>
+                <div class="stat-label">Tasks Completed</div>
+            </div>
+        </div>
+
+        <button onclick="window.close()">Close Tab</button>
+        <button onclick="openProductivePage()">Do Something Productive</button>
+    </div>
+
+    <script>
+        const motivationalQuotes = [
+            "Every minute you save from distractions is a minute invested in your goals!",
+            "Focus is the bridge between where you are and where you want to be.",
+            "Small daily improvements lead to stunning results.",
+            "Your future self will thank you for staying focused today.",
+            "Discipline is choosing between what you want now and what you want most."
+        ];
+
+        // Display random motivational quote
+        document.getElementById('motivationText').textContent =
+            motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+
+        // Load and display stats
+        if (typeof chrome !== 'undefined' && chrome.storage) {
+            chrome.storage.local.get(['blockedToday', 'dailyTasks'], (result) => {
+                document.getElementById('blockedToday').textContent = result.blockedToday || 0;
+                document.getElementById('tasksCompleted').textContent = result.dailyTasks || 0;
+            });
+
+            // Increment blocked count
+            chrome.storage.local.get(['blockedToday'], (result) => {
+                const newCount = (result.blockedToday || 0) + 1;
+                chrome.storage.local.set({ blockedToday: newCount });
+            });
+        }
+
+        function openProductivePage() {
+            window.location.href = 'https://todoist.com/app/today';
+        }
+    </script>
+</body>
+</html>

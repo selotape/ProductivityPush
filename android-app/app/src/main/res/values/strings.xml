@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">ProductivityPush</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Main Activity -->
+    <string name="blocking_active">Blocking Active</string>
+    <string name="blocking_inactive">Blocking Inactive</string>
+    <string name="enable_blocking">Enable Blocking</string>
+    <string name="tasks_completed_today">Tasks Completed Today: %1$d</string>
+    <string name="add_task_hint">What do you want to accomplish?</string>
+    <string name="add_task">Add Task</string>
+    <string name="daily_motivation">💪 Daily Motivation</string>
+
+    <!-- Blocked Activity -->
+    <string name="app_blocked_title">App Blocked</string>
+    <string name="app_blocked_message">This app is blocked to help you stay focused and productive.</string>
+    <string name="motivation_tip">💡 Motivation Tip</string>
+    <string name="close_app">Close App</string>
+    <string name="do_something_productive">Do Something Productive</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="blocked_apps">Blocked Apps</string>
+    <string name="notification_settings">Notifications</string>
+    <string name="daily_goals">Daily Goals</string>
+
+    <!-- Permissions -->
+    <string name="usage_permission_message">Please enable usage access for ProductivityPush to monitor app usage</string>
+    <string name="overlay_permission_message">Please enable overlay permission to block apps</string>
+
+    <!-- Motivational Messages -->
+    <string-array name="motivational_messages">
+        <item>Every small step counts towards your big goals! 🎯</item>
+        <item>You\'re building better habits one day at a time! 💪</item>
+        <item>Focus today, succeed tomorrow! ⭐</item>
+        <item>Your future self will thank you for staying productive! 🚀</item>
+        <item>Small daily improvements lead to stunning results! 📈</item>
+        <item>Stay focused, stay strong! 💯</item>
+        <item>Progress over perfection! 🌟</item>
+        <item>You have the power to choose focus over distraction! ⚡</item>
+    </string-array>
+</resources>

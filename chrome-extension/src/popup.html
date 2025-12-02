@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .active { background: #d4edda; color: #155724; }
+        .inactive { background: #f8d7da; color: #721c24; }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .toggle-btn { background: #007bff; color: white; }
+        .settings-btn { background: #6c757d; color: white; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h3>ProductivityPush</h3>
+    </div>
+
+    <div id="status" class="status inactive">
+        Blocking: Inactive
+    </div>
+
+    <button id="toggleBtn" class="toggle-btn">Enable Blocking</button>
+    <button id="settingsBtn" class="settings-btn">Settings</button>
+
+    <div style="margin-top: 15px; font-size: 12px; color: #666;">
+        Daily Progress: 0/1 tasks
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

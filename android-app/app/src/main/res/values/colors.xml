@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="primary">#667eea</color>
+    <color name="primary_dark">#5a67d8</color>
+    <color name="primary_light">#9f7aea</color>
+
+    <!-- Background Colors -->
+    <color name="background_primary">#f7fafc</color>
+    <color name="background_secondary">#ffffff</color>
+    <color name="motivation_background">#667eea</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#2d3748</color>
+    <color name="text_secondary">#718096</color>
+    <color name="text_accent">#667eea</color>
+
+    <!-- Status Colors -->
+    <color name="success">#48bb78</color>
+    <color name="warning">#ed8936</color>
+    <color name="error">#f56565</color>
+
+    <!-- Material Design Colors -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
